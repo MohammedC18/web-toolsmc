@@ -4,7 +4,7 @@
   "description": "CLI tool to generate Angular, Flask, TypeScript, Ajax, Analytics, and Security boilerplate projects",
   "main": "index.js",
   "bin": {
-    "web-toolsmc": "./index.js"
+    "web-toolsmc": "index.js"
   },
   "scripts": {
     "start": "node index.js"
@@ -33,7 +33,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MohammedC18/web-toolsmc.git"
+    "url": "git+https://github.com/MohammedC18/web-toolsmc.git"
   },
   "dependencies": {
     "fs-extra": "^11.3.5"
