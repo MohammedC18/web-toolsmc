@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bank Transfer</title>
+</head>
+<body>
+
+<h2>Bank Fund Transfer</h2>
+
+<form action="success.html" method="GET">
+    Name:<br>
+    <input type="text" id="name" name="name"><br><br>
+
+    Account No:<br>
+    <input type="text" id="account" name="account"><br><br>
+
+    Amount:<br>
+    <input type="text" id="amount" name="amount"><br><br>
+
+    <input type="submit" value="Transfer Now">
+</form>
+
+<script>
+    var p = new URLSearchParams(window.location.search);
+    document.getElementById('name').value    = p.get('name')    || '';
+    document.getElementById('account').value = p.get('account') || '';
+    document.getElementById('amount').value  = p.get('amount')  || '';
+</script>
+
+</body>
+</html>

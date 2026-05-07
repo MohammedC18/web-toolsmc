@@ -1,0 +1,185 @@
+Implement Events and Validations in Angular
+
+// ======================================
+// STEP 1
+// Create Project
+// ======================================
+
+ng new form-validation-app
+cd form-validation-app
+ng serve
+
+
+// ======================================
+// STEP 2
+// Create Component
+// ======================================
+
+ng g c register
+
+
+// ======================================
+// STEP 3
+// Open:
+// src/app/app.module.ts
+// ======================================
+
+import { FormsModule } from '@angular/forms';
+
+imports: [
+  BrowserModule,
+  AppRoutingModule,
+  FormsModule
+],
+
+
+// ======================================
+// STEP 4
+// Open:
+// src/app/app.component.html
+// ======================================
+
+<app-register></app-register>
+
+
+// ======================================
+// STEP 5
+// Open:
+// src/app/register/register.component.ts
+// ======================================
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
+})
+
+export class RegisterComponent {
+
+  name = "";
+  email = "";
+  password = "";
+
+  submittedData: any = null;
+
+  onSubmit(form: any) {
+
+    if (form.valid) {
+
+      this.submittedData = {
+        name: this.name,
+        email: this.email,
+        password: this.password
+      };
+
+      alert("Form Submitted Successfully!");
+    }
+  }
+
+  onReset(form: any) {
+    form.reset();
+    this.submittedData = null;
+  }
+
+}
+
+
+// ======================================
+// STEP 6
+// Open:
+// src/app/register/register.component.html
+// ======================================
+
+<h1>Registration Form</h1>
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+  <!-- NAME -->
+  <input
+    type="text"
+    name="name"
+    [(ngModel)]="name"
+    required
+    minlength="3"
+    placeholder="Enter Name"
+  >
+
+  <br><br>
+
+  <!-- EMAIL -->
+  <input
+    type="email"
+    name="email"
+    [(ngModel)]="email"
+    required
+    placeholder="Enter Email"
+  >
+
+  <br><br>
+
+  <!-- PASSWORD -->
+  <input
+    type="password"
+    name="password"
+    [(ngModel)]="password"
+    required
+    minlength="6"
+    placeholder="Enter Password"
+  >
+
+  <br><br>
+
+  <!-- BUTTON EVENTS -->
+  <button type="submit" [disabled]="!f.valid">
+    Submit
+  </button>
+
+  <button type="button" (click)="onReset(f)">
+    Reset
+  </button>
+
+<div *ngIf="submittedData">
+
+  <h2>Submitted Data</h2>
+
+  <p>Name: {{submittedData.name}}</p>
+  <p>Email: {{submittedData.email}}</p>
+
+</div>
+
+</form>
+
+
+
+// ======================================
+// STEP 8
+// RUN PROJECT
+// ======================================
+
+ng serve
+
+
+// ======================================
+// FEATURES USED
+// ======================================
+
+1. Events:
+   - (ngSubmit)
+   - (click)
+
+2. Validations:
+   - required
+   - minlength
+   - email type validation
+
+3. Angular Form Property:
+   - form.valid
+   - form.reset()
+
+4. Two-way Binding:
+   - [(ngModel)]
+
+5. Button Disable Logic:
+   - [disabled]="!f.valid"

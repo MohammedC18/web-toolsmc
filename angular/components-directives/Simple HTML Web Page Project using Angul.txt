@@ -1,0 +1,158 @@
+Simple HTML Web Page Project using Angular Framework and apply Components and Directives
+
+// ======================================
+// STEP 1
+// Create Project
+// ======================================
+
+ng new angular-demo
+cd angular-demo
+ng serve
+
+
+// ======================================
+// STEP 2
+// Create Components
+// ======================================
+
+ng g c header
+ng g c product
+ng g d highlight
+
+// ======================================
+// STEP 3
+// Create Directive
+// ======================================
+
+ng g d highlight
+
+
+// ======================================
+// STEP 4
+// Open:
+// src/app/app.component.ts
+// ======================================
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html'
+})
+export class AppComponent {
+
+  products = [
+    { name: 'Laptop', price: 800 },
+    { name: 'Mobile', price: 500 },
+    { name: 'Tablet', price: 300 }
+  ];
+
+}
+
+
+// ======================================
+// STEP 5
+// Open:
+// src/app/app.component.html
+// ======================================
+
+<app-header></app-header>
+
+<h2>Product List</h2>
+
+<app-product
+  *ngFor="let p of products"
+  [product]="p">
+</app-product>
+
+
+// ======================================
+// STEP 6
+// Open:
+// src/app/header/header.component.html
+// ======================================
+
+<h1>My Angular Website</h1>
+<hr>
+
+
+// ======================================
+// STEP 7
+// Open:
+// src/app/product/product.component.ts
+// ======================================
+
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-product',
+  templateUrl: './product.component.html'
+})
+export class ProductComponent {
+  @Input() product: any;
+}
+
+
+// ======================================
+// STEP 8
+// Open:
+// src/app/product/product.component.html
+// ======================================
+
+<div appHighlight>
+
+  <h3>{{ product.name }}</h3>
+
+  <p *ngIf="product.price > 400">
+    Price: {{ product.price }}
+  </p>
+
+  <p *ngIf="product.price <= 400">
+    Cheap Product: {{ product.price }}
+  </p>
+
+</div>
+
+
+// ======================================
+// STEP 9
+// Open:
+// src/app/highlight.directive.ts
+// ======================================
+
+import { Directive, ElementRef, HostListener } from '@angular/core';
+
+@Directive({
+  selector: '[appHighlight]'
+})
+export class HighlightDirective {
+
+  constructor(private el: ElementRef) {}
+
+  @HostListener('mouseenter')
+  onEnter() {
+    this.el.nativeElement.style.backgroundColor = 'yellow';
+  }
+
+  @HostListener('mouseleave')
+  onLeave() {
+    this.el.nativeElement.style.backgroundColor = '';
+  }
+
+}
+
+
+// ======================================
+// STEP 10
+// Run Project
+// ======================================
+
+ng serve
+
+
+// ======================================
+// STEP 11
+// Open Browser
+// ======================================
+
+http://localhost:4200/

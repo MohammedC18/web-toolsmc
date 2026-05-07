@@ -1,0 +1,157 @@
+
+Create Feedback System using Angular
+
+// ======================================
+// STEP 1
+// Create Project
+// ======================================
+
+ng new feedback-system
+cd feedback-system
+ng serve
+
+
+// ======================================
+// STEP 2
+// Create Component
+// ======================================
+
+ng g c feedback
+
+
+// ======================================
+// STEP 3
+// Open:
+// src/app/app.component.html
+// ======================================
+
+DELETE EVERYTHING
+
+PASTE:
+
+<app-feedback></app-feedback>
+
+
+// ======================================
+// STEP 4
+// Open:
+//
+// src/app/app.module.ts
+// ======================================
+
+ADD THIS LINE:
+
+import { FormsModule } from '@angular/forms';
+
+
+// ADD FormsModule INSIDE imports
+
+imports: [
+  BrowserModule,
+  AppRoutingModule,
+  FormsModule
+],
+
+
+// ======================================
+// STEP 5
+// Open:
+//
+// src/app/feedback/feedback.component.ts
+// ======================================
+
+DELETE EVERYTHING
+
+PASTE:
+
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-feedback',
+  templateUrl: './feedback.component.html',
+  styleUrls: ['./feedback.component.css']
+})
+
+export class FeedbackComponent {
+
+  name = "";
+  message = "";
+
+  feedbacks:any[] = [];
+
+  addFeedback() {
+
+    this.feedbacks.push({
+      name: this.name,
+      message: this.message
+    });
+
+    this.name = "";
+    this.message = "";
+  }
+
+}
+
+
+// ======================================
+// STEP 6
+// Open:
+//
+// src/app/feedback/feedback.component.html
+// ======================================
+
+DELETE EVERYTHING
+
+PASTE:
+
+
+<h1>Feedback System</h1>
+
+<input type="text"
+placeholder="Enter Name"
+[(ngModel)]="name">
+
+<br><br>
+
+<textarea
+placeholder="Enter Feedback"
+[(ngModel)]="message">
+</textarea>
+
+<br><br>
+
+<button (click)="addFeedback()">
+Submit
+</button>
+
+<hr>
+
+<h2>Feedback List</h2>
+
+<ul>
+
+<li *ngFor="let f of feedbacks">
+
+<b>{{f.name}}</b> :
+{{f.message}}
+
+</li>
+
+</ul>
+
+
+// ======================================
+// STEP 7
+// Run Project
+// ======================================
+
+ng serve
+
+
+// ======================================
+// STEP 8
+// Open Browser
+// ======================================
+
+http://localhost:4200/

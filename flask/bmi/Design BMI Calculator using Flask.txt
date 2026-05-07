@@ -1,0 +1,228 @@
+Design BMI Calculator using Flask
+
+
+# ======================================
+# STEP 1
+# Install Flask
+# ======================================
+
+pip install flask
+
+
+# ======================================
+# STEP 2
+# Create Project Folder
+# ======================================
+
+mkdir flask-bmi-app
+
+cd flask-bmi-app
+
+
+# ======================================
+# STEP 3
+# Create Files
+# ======================================
+
+New-Item app.py -ItemType File
+
+mkdir templates
+
+New-Item templates\index.html -ItemType File
+
+
+# ======================================
+# STEP 4
+# Open Project in VS Code
+# ======================================
+
+code .
+
+
+# ======================================
+# STEP 5
+# Open:
+# app.py
+# ======================================
+
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+
+@app.route('/', methods=['GET', 'POST'])
+
+def bmi():
+
+    result = ""
+
+    if request.method == 'POST':
+
+        weight = request.form.get('weight')
+
+        height = request.form.get('height')
+
+        weight_unit = request.form.get('weight_unit')
+
+        height_unit = request.form.get('height_unit')
+
+
+        weight = float(weight)
+
+        height = float(height)
+
+
+        # WEIGHT CONVERSION
+
+        if weight_unit == "lbs":
+
+            weight = weight * 0.453592
+
+
+        # HEIGHT CONVERSION
+
+        if height_unit == "cm":
+
+            height = height / 100
+
+        elif height_unit == "feet":
+
+            height = height * 0.3048
+
+
+        # BMI CALCULATION
+
+        bmi_value = weight / (height * height)
+
+        result = f"Your BMI is {round(bmi_value, 2)}"
+
+
+    return render_template(
+        'index.html',
+        result=result
+    )
+
+
+if __name__ == '__main__':
+
+    app.run(debug=True)
+
+
+# ======================================
+# STEP 6
+# Open:
+# templates/index.html
+# ======================================
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>BMI Calculator</title>
+
+</head>
+
+<body>
+
+<h1>BMI Calculator</h1>
+
+<form method="POST">
+
+    <input
+        type="number"
+        step="any"
+        name="weight"
+        placeholder="Enter Weight"
+        required
+    >
+
+    <select name="weight_unit">
+
+        <option value="kg">KG</option>
+
+        <option value="lbs">LBS</option>
+
+    </select>
+
+    <br><br>
+
+    <input
+        type="number"
+        step="any"
+        name="height"
+        placeholder="Enter Height"
+        required
+    >
+
+    <select name="height_unit">
+
+        <option value="m">Meters</option>
+
+        <option value="cm">CM</option>
+
+        <option value="feet">Feet</option>
+
+    </select>
+
+    <br><br>
+
+    <button type="submit">
+
+        Calculate BMI
+
+    </button>
+
+</form>
+
+<br>
+
+<h2>{{result}}</h2>
+
+</body>
+</html>
+
+# ======================================
+# STEP 7
+# Run Project
+# ======================================
+
+python app.py
+
+
+# ======================================
+# STEP 8
+# Open Browser
+# ======================================
+
+http://127.0.0.1:5000/
+
+
+# ======================================
+# OUTPUT
+# ======================================
+
+User enters:
+- Weight
+- Height
+
+BMI is calculated and displayed.
+
+
+# ======================================
+# FEATURES USED
+# ======================================
+
+1. Flask Framework
+
+2. HTML Form
+
+3. POST Method
+
+4. Flask Routing
+
+5. BMI Calculation
+
+6. Form Handling using request.form
+
+7. Dynamic Result Display
