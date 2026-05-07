@@ -1,0 +1,25 @@
+{
+  "name": "web-toolsmc",
+  "version": "1.1.7",
+  "description": "CLI tool to generate Angular, Flask, and Security boilerplate projects",
+  "main": "index.js",
+  "bin": {
+    "web-toolsmc": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "cli",
+    "generator",
+    "boilerplate",
+    "angular",
+    "flask",
+    "security"
+  ],
+  "author": "your-name",
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^11.3.5"
+  }
+}

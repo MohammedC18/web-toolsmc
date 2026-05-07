@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>AJAX Movie List</title>
+
+</head>
+
+<body>
+
+<h1>Recently Watched Movies</h1>
+
+<input
+  type="text"
+  id="movie"
+  placeholder="Enter Movie Name"
+>
+
+<br><br>
+
+<button onclick="addMovie()">
+
+  Add Movie
+
+</button>
+
+<br><br>
+
+<div id="result"></div>
+
+
+<script>
+
+function addMovie()
+{
+
+  // GET INPUT
+
+  let movie =
+    document.getElementById("movie").value;
+
+
+  // CREATE AJAX OBJECT
+
+  let xhr = new XMLHttpRequest();
+
+
+  // HANDLE RESPONSE
+
+  xhr.onreadystatechange = function()
+  {
+
+    if(xhr.readyState == 4 && xhr.status == 200)
+    {
+
+      document.getElementById("result").innerHTML +=
+        "<p>" + movie + "</p>";
+
+    }
+
+  };
+
+
+  // REQUEST
+
+  xhr.open(
+    "GET",
+    "https://jsonplaceholder.typicode.com/posts/1",
+    true
+  );
+
+  xhr.send();
+
+
+  // CLEAR INPUT
+
+  document.getElementById("movie").value = "";
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+# ======================================
+# AIM
+# ======================================
+
+# Design Feedback Form using Flask
+
+
+# ======================================
+# STEP 1
+# Install Flask
+# ======================================
+
+pip install flask
+
+
+# ======================================
+# STEP 2
+# Create Project Folder
+# ======================================
+
+mkdir flask-feedback
+
+cd flask-feedback
+
+
+# ======================================
+# STEP 3
+# Create Files
+# ======================================
+
+New-Item app.py -ItemType File
+
+mkdir templates
+
+New-Item templates\index.html -ItemType File
+
+
+# ======================================
+# STEP 4
+# Open Project in VS Code
+# ======================================
+
+code .
+
+
+# ======================================
+# STEP 5
+# Open:
+# app.py
+# ======================================
+
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+
+@app.route('/', methods=['GET', 'POST'])
+
+def feedback():
+
+    message = ""
+
+    if request.method == 'POST':
+
+        name = request.form['name']
+
+        feedback = request.form['feedback']
+
+        message = f"Thank You {name} for your feedback!"
+
+    return render_template(
+        'index.html',
+        message=message
+    )
+
+
+if __name__ == '__main__':
+
+    app.run(debug=True)
+
+
+
+# ======================================
+# STEP 6
+# Open:
+# templates/index.html
+# ======================================
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Feedback Form</title>
+
+</head>
+
+<body>
+
+<h1>Feedback Form</h1>
+
+<form method="POST">
+
+    <input
+        type="text"
+        name="name"
+        placeholder="Enter Name"
+        required
+    >
+
+    <br><br>
+
+    <textarea
+        name="feedback"
+        placeholder="Enter Feedback"
+        required
+    ></textarea>
+
+    <br><br>
+
+    <button type="submit">
+
+        Submit
+
+    </button>
+
+</form>
+
+<br>
+
+<h2>{{message}}</h2>
+
+</body>
+</html>
+
+
+# ======================================
+# STEP 7
+# Run Project
+# ======================================
+
+python app.py
+
+
+# ======================================
+# STEP 8
+# Open Browser
+# ======================================
+
+http://127.0.0.1:5000/
+
+
+# ======================================
+# OUTPUT
+# ======================================
+
+User enters:
+- Name
+- Feedback
+
+After clicking submit,
+feedback message is displayed.
+
+
+# ======================================
+# FEATURES USED
+# ======================================
+
+1. Flask Framework
+
+2. HTML Form
+
+3. POST Method
+
+4. Flask Routing
+
+5. Form Handling using request.form
+
+6. Dynamic Message Display

@@ -1,0 +1,78 @@
+
+mkdir simple-website
+cd simple-website
+type nul > index.html
+type nul > style.css
+type nul > app.ts
+npm init -y
+npm install -g typescript
+tsc --init
+
+// Step 4: Write Code in app.ts
+
+function showMessage(): void {
+    const message = document.getElementById("msg");
+
+    if (message) {
+        message.innerHTML = "Welcome to TypeScript Website!";
+    }
+}
+// Step 5: Write Code in index.html
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TypeScript Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Simple TypeScript Website</h1>
+
+        <button onclick="showMessage()">
+            Click Me
+        </button>
+
+        <p id="msg"></p>
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
+
+
+// Step 6: Write Code in style.css
+
+body {
+    font-family: Arial;
+    background-color: lightblue;
+    text-align: center;
+}
+
+.container {
+    margin-top: 100px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+p {
+    color: darkblue;
+    font-size: 22px;
+}
+
+
+// Step 7: Compile TypeScript
+
+tsc app.ts
+
+
+// Step 8: Run Website
+
+start index.html

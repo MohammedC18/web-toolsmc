@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Security Demo</title>
+
+</head>
+
+<body>
+
+<h1>XSS and SQL Injection Demo</h1>
+
+<form method="POST">
+
+    <input
+        type="text"
+        name="username"
+        placeholder="Enter Username"
+        required
+    >
+
+    <br><br>
+
+    <textarea
+        name="comment"
+        placeholder="Enter Comment"
+        required
+    ></textarea>
+
+    <br><br>
+
+    <button type="submit">
+
+        Submit
+
+    </button>
+
+</form>
+
+<br>
+
+<!-- UNSAFE OUTPUT -->
+
+{{result | safe}}
+
+</body>
+</html>
+
+<!-- SQL Injection Test:
+
+Username:
+' OR '1'='1
+
+Output:
+SQL Injection Successful
+
+
+XSS Test:
+
+Comment:
+<script>alert("XSS")</script>
+
+Popup alert is displayed. -->

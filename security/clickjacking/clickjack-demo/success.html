@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transfer Success</title>
+</head>
+<body>
+
+<h2 style="color:green;">Transfer Successful!</h2>
+
+<p>The following transfer was made:</p>
+
+<script>
+    var p = new URLSearchParams(window.location.search);
+    document.write("Name: " + p.get('name') + "<br>");
+    document.write("Account: " + p.get('account') + "<br>");
+    document.write("Amount: Rs." + p.get('amount') + "<br>");
+</script>
+
+<br>
+<p style="color:red;">** Victim had no idea. They thought they clicked a prize button. **</p>
+
+</body>
+</html>

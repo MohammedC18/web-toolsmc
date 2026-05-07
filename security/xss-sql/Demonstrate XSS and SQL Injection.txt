@@ -1,0 +1,196 @@
+ Demonstrate XSS and SQL Injection
+
+# STEP 1
+# Install Flask
+
+pip install flask
+
+
+# ======================================
+# STEP 2
+# Create Project Folder
+# ======================================
+
+mkdir security-demo
+
+cd security-demo
+
+
+# ======================================
+# STEP 3
+# Create Files
+# ======================================
+
+New-Item app.py -ItemType File
+
+mkdir templates
+
+New-Item templates\index.html -ItemType File
+
+
+# ======================================
+# STEP 4
+# Open Project in VS Code
+# ======================================
+
+code .
+
+
+# ======================================
+# STEP 5
+# Open:
+# app.py
+# ======================================
+
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+
+@app.route('/', methods=['GET', 'POST'])
+
+def home():
+
+    result = ""
+
+    if request.method == 'POST':
+
+        username = request.form['username']
+
+        comment = request.form['comment']
+
+
+        # SQL INJECTION DEMO
+
+        if "' OR '1'='1" in username:
+
+            result = "SQL Injection Successful"
+
+
+        # XSS DEMO
+
+        else:
+
+            result = comment
+
+
+    return render_template(
+        'index.html',
+        result=result
+    )
+
+
+if __name__ == '__main__':
+
+    app.run(debug=True)
+
+
+
+# ======================================
+# STEP 6
+# Open:
+# templates/index.html
+# ======================================
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Security Demo</title>
+
+</head>
+
+<body>
+
+<h1>XSS and SQL Injection Demo</h1>
+
+<form method="POST">
+
+    <input
+        type="text"
+        name="username"
+        placeholder="Enter Username"
+        required
+    >
+
+    <br><br>
+
+    <textarea
+        name="comment"
+        placeholder="Enter Comment"
+        required
+    ></textarea>
+
+    <br><br>
+
+    <button type="submit">
+
+        Submit
+
+    </button>
+
+</form>
+
+<br>
+
+<!-- UNSAFE OUTPUT -->
+
+{{result | safe}}
+
+</body>
+</html>
+
+
+# ======================================
+# STEP 7
+# Run Project
+# ======================================
+
+python app.py
+
+
+# ======================================
+# STEP 8
+# Open Browser
+# ======================================
+
+http://127.0.0.1:5000/
+
+
+# ======================================
+# OUTPUT
+# ======================================
+
+SQL Injection Test:
+
+Username:
+' OR '1'='1
+
+Output:
+SQL Injection Successful
+
+
+XSS Test:
+
+Comment:
+<script>alert("XSS")</script>
+
+Popup alert is displayed.
+
+
+# ======================================
+# FEATURES USED
+# ======================================
+
+1. Flask Framework
+
+2. HTML Forms
+
+3. XSS Demonstration
+
+4. SQL Injection Demonstration
+
+5. Flask Routing
+
+6. Unsafe Input Rendering

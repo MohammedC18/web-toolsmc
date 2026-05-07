@@ -1,0 +1,185 @@
+// ======================================
+// AIM
+// ======================================
+
+Write a program to use AJAX for user validation
+and display the result on the same page
+below the submit button.
+
+
+// ======================================
+// STEP 1
+// Create Project Folder
+// ======================================
+
+mkdir ajax-validation
+
+cd ajax-validation
+
+
+// ======================================
+// STEP 2
+// Create File
+// ======================================
+
+New-Item index.html -ItemType File
+
+
+// ======================================
+// STEP 3
+// Open Project in VS Code
+// ======================================
+
+code .
+
+
+// ======================================
+// STEP 4
+// Open:
+// index.html
+// ======================================
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>AJAX User Validation</title>
+
+</head>
+
+<body>
+
+<h1>AJAX User Validation</h1>
+
+<form>
+
+  <!-- USERNAME -->
+
+  <input
+    type="text"
+    id="username"
+    placeholder="Enter Username"
+  >
+
+  <br><br>
+
+
+  <!-- PASSWORD -->
+
+  <input
+    type="password"
+    id="password"
+    placeholder="Enter Password"
+  >
+
+  <br><br>
+
+
+  <!-- SUBMIT BUTTON -->
+
+  <button
+    type="button"
+    onclick="validateUser()"
+  >
+    Submit
+  </button>
+
+</form>
+
+<br>
+
+
+<!-- RESULT DISPLAY -->
+
+<h2 id="result"></h2>
+
+
+<script>
+
+function validateUser()
+{
+
+  let username =
+    document.getElementById("username").value;
+
+  let password =
+    document.getElementById("password").value;
+
+
+  // AJAX SIMULATION
+
+  setTimeout(function()
+  {
+
+    if(username == "admin" && password == "1234")
+    {
+
+      document.getElementById("result").innerHTML =
+        "Valid User";
+
+    }
+    else
+    {
+
+      document.getElementById("result").innerHTML =
+        "Invalid User";
+
+    }
+
+  }, 500);
+
+}
+
+</script>
+
+</body>
+</html>
+
+
+// ======================================
+// STEP 5
+// Run Project
+// ======================================
+
+Double click:
+index.html
+
+OR
+
+Open with browser
+
+
+// ======================================
+// OUTPUT
+// ======================================
+
+If Username = admin
+and Password = 1234
+
+Output:
+Valid User
+
+Otherwise:
+
+Output:
+Invalid User
+
+
+// ======================================
+// FEATURES USED
+// ======================================
+
+1. AJAX Simulation
+
+2. JavaScript Functions
+   - onclick()
+   - setTimeout()
+
+3. DOM Manipulation
+   - getElementById()
+   - innerHTML
+
+4. User Validation
+
+5. Result Display on Same Page

@@ -1,0 +1,149 @@
+
+// ===============================
+// Step 1: Create Angular Project
+// ===============================
+
+ng new student-record
+cd student-record
+ng serve
+
+// ===============================
+// Step 2: Create Component
+// ===============================
+
+ng generate component student
+
+
+// ===============================
+// Step 3: Open app.module.ts
+// ===============================
+
+import { FormsModule } from '@angular/forms';
+
+imports: [
+  BrowserModule,
+  FormsModule
+]
+
+
+// ===============================
+// Step 4: student.component.ts
+// ===============================
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-student',
+  templateUrl: './student.component.html',
+  styleUrls: ['./student.component.css']
+})
+
+export class StudentComponent {
+
+  name = '';
+  roll = '';
+  course = '';
+
+  students: any[] = [];
+
+  addStudent() {
+
+    this.students.push({
+      name: this.name,
+      roll: this.roll,
+      course: this.course
+    });
+
+    this.name = '';
+    this.roll = '';
+    this.course = '';
+  }
+}
+
+
+// ===============================
+// Step 5: student.component.html
+// ===============================
+
+<h1>Student Record</h1>
+
+<input type="text"
+placeholder="Enter Name"
+[(ngModel)]="name">
+
+<br><br>
+
+<input type="text"
+placeholder="Enter Roll No"
+[(ngModel)]="roll">
+
+<br><br>
+
+<input type="text"
+placeholder="Enter Course"
+[(ngModel)]="course">
+
+<br><br>
+
+<button (click)="addStudent()">
+Add Student
+</button>
+
+<hr>
+
+<table border="1" cellpadding="10">
+
+<tr>
+  <th>Name</th>
+  <th>Roll No</th>
+  <th>Course</th>
+</tr>
+
+<tr *ngFor="let s of students">
+  <td>{{s.name}}</td>
+  <td>{{s.roll}}</td>
+  <td>{{s.course}}</td>
+</tr>
+
+</table>
+
+
+// ===============================
+// Step 6: student.component.css
+// ===============================
+
+h1 {
+  color: blue;
+}
+
+input {
+  padding: 8px;
+  width: 200px;
+}
+
+button {
+  padding: 8px 15px;
+}
+
+table {
+  margin-top: 20px;
+}
+
+
+// ===============================
+// Step 7: app.component.html
+// ===============================
+
+<app-student></app-student>
+
+
+// ===============================
+// Step 8: Run Project
+// ===============================
+
+ng serve
+
+
+// Open Browser
+
+http://localhost:4200/
